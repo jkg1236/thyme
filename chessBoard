@@ -1,0 +1,82 @@
+import java.awt.Color;
+import java.util.Random;
+
+import info.gridworld.grid.BoundedGrid;
+import info.gridworld.grid.Grid;
+import info.gridworld.grid.Location;
+import info.gridworld.world.World;
+
+
+public class chessBoard extends World {
+	Grid g = this.getGrid();
+	Random die = new Random();
+	public chessBoard() {
+		super(new BoundedGrid(8,8));
+		setUpBoard();
+	}
+	
+	
+	private void setUpBoard() {
+		// pawn = 1
+		//bishop = 4
+		//knight = 3
+		//rook = 5
+		//king = 9
+		//queen = 10
+	//		for (int c = 0; c < g.getNumCols(); c++) {
+	//			Location loc = new Location (1,c);
+	//			add(loc, new bPawn(loc,g));
+	//		}
+	//		add(new Location(0,0), new bRook(new Location(0,0), g));
+	//		add(new Location(0,7), new bRook(new Location(0,7), g));
+	//		add(new Location(0,1), new bKnight(new Location(0,1), g));
+	//		add(new Location(0,6), new bKnight(new Location(0,6), g));
+	//		add(new Location(0,2), new bBishop(new Location(0,2), g));
+	//		add(new Location(0,5), new bBishop(new Location(0,5), g));
+		add(new Location(0,3), new bQueen(new Location(0,3), g));
+	//		add(new Location(0,4), new bKing(new Location(0,4), g));
+
+		for (int c2 = 0; c2< g.getNumCols(); c2++) {
+			Location loc = new Location(6,c2);
+			add(loc, new wPawn(loc,g));
+		}
+	//		add(new Location(7,0), new wRook(new Location(7,0), g));
+	//		add(new Location(7,7), new wRook(new Location(7,7), g));
+	//		add(new Location(7,1), new wKnight(new Location(7,1), g));
+	//		add(new Location(7,6), new wKnight(new Location(7,6), g));
+	//		add(new Location(7,2), new wBishop(new Location(7,2), g));
+	//		add(new Location(7,5), new wBishop(new Location(7,5), g));
+	//		add(new Location(7,3), new wQueen(new Location(7,3), g));
+	//		add(new Location(7,4), new wKing(new Location(7,4), g));
+
+}
+
+	Location loc1 = new Location(0, 0);
+	Location loc2 = new Location(0, 0);
+	int value1 = 0;
+	int value2 = 0;
+	Color col1 = null;
+	Color col2 = null;
+	int click = 1;
+	
+	@Override
+	public boolean locationClicked(Location loc) {
+		System.out.println((chessPiece) g.get(loc));
+		int value1 = ((chessPiece) g.get(loc)).getVal();
+		System.out.println(value1);
+		
+		if (click == 1) {
+			click ++;
+			loc1 = loc;
+			return true;
+		}
+
+		else if (click == 2) {
+			click --;
+			loc2 = loc;
+			return true;
+		}
+		return false;
+		
+	}
+}
